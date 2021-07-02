@@ -1,0 +1,26 @@
+import java.util.*;
+
+class Program {
+  public static int[] selectionSort(int[] array) {
+		if(array.length!=0){
+			int min = 0;
+			int index = 0;
+			int temp = 0;
+			for(int i = 0;i<array.length;i++){
+				min = Integer.MAX_VALUE;
+				for(int j = i;j<array.length;j++){
+					if(min>array[j]){
+						min = Math.min(min,array[j]);
+						index = j;
+					}
+				}
+				temp = array[index];
+				array[index] = array[i];
+				array[i] = temp;
+			}
+			return array;
+		}
+    // Write your code here.
+    return new int[] {};
+  }
+}
