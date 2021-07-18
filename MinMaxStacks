@@ -3,51 +3,43 @@ import java.util.*;
 class Program {
   // Feel free to add new properties and methods to the class.
   static class MinMaxStack {
+		List<Integer> array = new ArrayList<>();
+		List<Map<String,Integer>> minMax = new ArrayList<>();
     public int peek() {
       // Write your code here.
-			if(!values.isEmpty())
-				return values.peek();
-      return -1;
+      return array.size()>0?array.get(array.size()-1):-1;
     }
 
     public int pop() {
       // Write your code here.
-			if(!values.isEmpty()){
-				int number = values.peek();
-				if(!min.isEmpty() && number == min.peek())
-						min.pop();
-				if(!max.isEmpty() && number == max.peek())
-						max.pop();
-				return values.pop();
+			if(array.size()>0){
+				minMax.remove(minMax.size()-1);
+				return array.remove(array.size()-1);	
 			}
       return -1;
     }
 
     public void push(Integer number) {
       // Write your code here.
-			values.push(number);
-			if(min.isEmpty() || number<=min.peek())
-					min.push(number);
-			if(max.isEmpty() || number>=max.peek())
-					max.push(number);
+			Map<String,Integer> keyMap = new HashMap<>();
+			keyMap.put("min",number);
+			keyMap.put("max",number);
+			if(minMax.size()>0){
+				keyMap.put("min",Math.min(minMax.get(minMax.size()-1).get("min"),number));
+				keyMap.put("max",Math.max(minMax.get(minMax.size()-1).get("max"),number));				 
+			}
+			minMax.add(keyMap);
+			array.add(number);
     }
 
     public int getMin() {
       // Write your code here.
-			if(!min.isEmpty())
-					return min.peek();
-      return -1;
+      return minMax.size()>0?minMax.get(minMax.size()-1).get("min"):-1;
     }
 
     public int getMax() {
       // Write your code here.
-			if(!max.isEmpty())
-					return max.peek();
-      return -1;
+      return minMax.size()>0?minMax.get(minMax.size()-1).get("max"):-1;
     }
-		
-		Stack<Integer> values = new Stack<>();
-		Stack<Integer> min = new Stack<>();
-		Stack<Integer> max = new Stack<>();
   }
 }
