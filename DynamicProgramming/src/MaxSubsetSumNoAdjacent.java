@@ -13,6 +13,7 @@ class Program {
         if(array.length>=1)
             dpAr[1] = array[0];
         for(int i = 1;i<array.length;i++){
+            //taking max from second last and last element and storing it in dp array
             dpAr[i+1] = Math.max(array[i]+dpAr[i-1], dpAr[i]);
         }
         return dpAr[array.length];
